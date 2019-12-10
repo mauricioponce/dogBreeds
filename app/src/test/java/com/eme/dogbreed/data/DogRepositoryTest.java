@@ -8,24 +8,29 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class DogRepositoryTest {
 
     IDogRepository repository;
+    FakeRestApi restApi;
 
     @Before
     public void setUp() throws Exception {
-        repository = new DogRepository();
+        restApi = spy(FakeRestApi.class);
+        repository = DogRepository.getInstance(restApi);
     }
 
     @Test
-    public void getDogs() {
+    public void getDogs_happyCase() {
         // Given
 
         // When
         LiveData<Dog> dogs = repository.getDogs();
 
         // Then
-        assert dogs == null;
+        verify(restApi, times(1)).getBreedList();
     }
 }
