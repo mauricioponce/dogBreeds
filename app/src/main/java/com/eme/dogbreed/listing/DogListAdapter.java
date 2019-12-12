@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.eme.dogbreed.databinding.ListItemBinding;
 import com.eme.dogbreed.model.Dog;
+import com.eme.dogbreed.viewmodel.DogViewModel;
 
 import timber.log.Timber;
 
 public class DogListAdapter extends ListAdapter<Dog, DogListAdapter.ViewHolder> {
 
-    protected DogListAdapter() {
+    private DogViewModel viewModel;
+
+    protected DogListAdapter(DogViewModel viewModel) {
         super(new DogDiffCallback());
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -35,8 +39,8 @@ public class DogListAdapter extends ListAdapter<Dog, DogListAdapter.ViewHolder> 
 
     private View.OnClickListener createOnClickListener(Dog dog) {
         return (view) -> {
-            Timber.w("createOnClickListener() not implemented with: dog = [" + dog + "]");
-
+            Timber.d("createOnClickListener() called with: dog = [" + dog + "]");
+            viewModel.setSelected(dog);
         };
     }
 

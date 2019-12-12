@@ -53,4 +53,22 @@ public class DogViewModelTest {
             assertThat(iexc).isNull(); // Forced failure
         }
     }
+
+    @Test
+    public void setSelected_happyCase(){
+        // Given
+        Dog dog = new Dog("breedName", "subBreedName");
+
+        // When
+        viewModel.setSelected(dog);
+
+        // Then
+        try {
+            TestObserver.test(viewModel.getSelected())
+                    .awaitValue()
+                    .assertHasValue();
+        } catch (InterruptedException iexc) {
+            assertThat(iexc).isNull(); // Forced failure
+        }
+    }
 }

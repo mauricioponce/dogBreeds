@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.eme.dogbreed.data.IDogRepository;
 import com.eme.dogbreed.model.Dog;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FakeRepository implements IDogRepository {
@@ -27,4 +27,14 @@ public class FakeRepository implements IDogRepository {
         listMutableLiveData.setValue(getDefaultBreeds());
         return listMutableLiveData;
     }
+
+    @Override
+    public LiveData<List<String>> getImages(Dog dog) {
+        List<String> urls = Arrays.asList(new String[]{"http://me.img", "https://bla.img"});
+        MutableLiveData<List<String>> listMutableLiveData = new MutableLiveData<>();
+        listMutableLiveData.setValue(urls);
+        return listMutableLiveData;
+    }
+
+
 }

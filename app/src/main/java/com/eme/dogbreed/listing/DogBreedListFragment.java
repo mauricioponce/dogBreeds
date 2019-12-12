@@ -30,7 +30,7 @@ public class DogBreedListFragment extends Fragment {
 
         viewModel = (DogViewModel) new DogViewModelFactory(InjectorUtils.getDogRepository(getContext())).create(DogViewModel.class);
 
-        dogListAdapter = new DogListAdapter();
+        dogListAdapter = new DogListAdapter(viewModel);
 
         viewModel.getDogs().observe(this, dogs -> {
             Timber.d("observing changes for dogs list %d", dogs.size());

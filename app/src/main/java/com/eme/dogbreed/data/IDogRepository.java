@@ -10,4 +10,5 @@ public interface IDogRepository {
 
     LiveData<List<Dog>> getDogs();
 
+    LiveData<List<String>> getImages(Dog dog);
 }
