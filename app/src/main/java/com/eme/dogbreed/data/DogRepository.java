@@ -2,10 +2,12 @@ package com.eme.dogbreed.data;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.eme.dogbreed.model.Dog;
 import com.eme.dogbreed.remote.IDogRestApi;
 import com.eme.dogbreed.remote.pojo.ResponseWrapper;
+import com.eme.dogbreed.util.Transformer;
 
 import java.util.List;
 
@@ -20,11 +22,13 @@ public class DogRepository implements IDogRepository {
 
     private IDogRestApi dogRestApi;
 
+    private MutableLiveData<List<Dog>> dogs = new MutableLiveData<>();
+
     private DogRepository(IDogRestApi dogRestApi) {
         this.dogRestApi = dogRestApi;
     }
 
-    public static IDogRepository getInstance(IDogRestApi dogRestApi){
+    public static IDogRepository getInstance(IDogRestApi dogRestApi) {
         synchronized (DogRepository.class) {
             if (DogRepository.INSTANCE == null) {
                 DogRepository.INSTANCE = new DogRepository(dogRestApi);
@@ -40,7 +44,11 @@ public class DogRepository implements IDogRepository {
             public void onResponse(@NonNull Call<ResponseWrapper> call, @NonNull Response<ResponseWrapper> response) {
                 Timber.d("onResponse() called with: response = [" + response + "]");
 
-                Timber.d("body %s", response.body());
+                if(response.isSuccessful()) {
+                    List<Dog> dogList = Transformer.transformFromResponse(response.body().getMessage());
+
+                    DogRepository.this.dogs.setValue(dogList);
+                }
             }
 
             @Override
@@ -48,6 +56,6 @@ public class DogRepository implements IDogRepository {
                 Timber.w("onFailure() not implemented with: call = [" + call + "], t = [" + t + "]");
             }
         });
-        return null;
+        return dogs;
     }
 }
