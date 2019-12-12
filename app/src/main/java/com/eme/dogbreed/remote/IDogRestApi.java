@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface IDogRestApi {
 
-    @GET("/breeds/list/all")
+    @GET("breeds/list/all")
     Call<ResponseWrapper> getBreedList();
 }
