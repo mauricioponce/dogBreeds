@@ -7,6 +7,8 @@ import com.eme.dogbreed.model.Dog;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -28,7 +30,7 @@ public class DogRepositoryTest {
         // Given
 
         // When
-        LiveData<Dog> dogs = repository.getDogs();
+        LiveData<List<Dog>> dogs = repository.getDogs();
 
         // Then
         verify(restApi, times(1)).getBreedList();

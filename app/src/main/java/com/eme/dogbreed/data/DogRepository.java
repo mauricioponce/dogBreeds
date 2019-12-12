@@ -7,6 +7,8 @@ import com.eme.dogbreed.model.Dog;
 import com.eme.dogbreed.remote.IDogRestApi;
 import com.eme.dogbreed.remote.pojo.ResponseWrapper;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +34,7 @@ public class DogRepository implements IDogRepository {
     }
 
     @Override
-    public LiveData<Dog> getDogs() {
+    public LiveData<List<Dog>> getDogs() {
         dogRestApi.getBreedList().enqueue(new Callback<ResponseWrapper>() {
             @Override
             public void onResponse(@NonNull Call<ResponseWrapper> call, @NonNull Response<ResponseWrapper> response) {

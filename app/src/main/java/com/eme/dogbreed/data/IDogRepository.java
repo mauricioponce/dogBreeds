@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData;
 
 import com.eme.dogbreed.model.Dog;
 
+import java.util.List;
+
 public interface IDogRepository {
 
-    LiveData<Dog> getDogs();
+    LiveData<List<Dog>> getDogs();
 
 }
