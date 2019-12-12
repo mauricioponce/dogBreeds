@@ -20,6 +20,8 @@ public class DogBreedListFragment extends Fragment {
 
     private DogViewModel viewModel;
 
+    private DogListAdapter dogListAdapter;
+
     private FragmentDogBreedListBinding binding;
 
     @Override
@@ -28,11 +30,12 @@ public class DogBreedListFragment extends Fragment {
 
         viewModel = (DogViewModel) new DogViewModelFactory(InjectorUtils.getDogRepository(getContext())).create(DogViewModel.class);
 
+        dogListAdapter = new DogListAdapter();
 
         viewModel.getDogs().observe(this, dogs -> {
             Timber.d("observing changes for dogs list %d", dogs.size());
 
-            dogs.stream().forEach(dog -> Timber.d(dog.toString()));
+            dogListAdapter.submitList(dogs);
         });
     }
 
@@ -42,6 +45,13 @@ public class DogBreedListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentDogBreedListBinding.inflate(inflater, container, false);
 
+        setupAdapter();
+
         return binding.getRoot();
+    }
+
+    private void setupAdapter() {
+        Timber.d("setupAdapter() called");
+        binding.dogBreedList.setAdapter(dogListAdapter);
     }
 }
