@@ -45,4 +45,18 @@ public class TransformerTest {
         assertThat(dogs).isNotNull();
         assertThat(dogs).isEmpty();
     }
+
+    @Test
+    public void transformFromResponse_emptyList() {
+        // Given
+        HashMap<String, List<String>> breedsList = new HashMap<>();
+
+        // When
+        List<Dog> dogs = Transformer.transformFromResponse(breedsList);
+
+        // Then
+        assertThat(dogs).isNotNull();
+        assertThat(dogs).isEmpty();
+    }
+
 }
