@@ -2,7 +2,6 @@ package com.eme.dogbreed.util;
 
 import com.eme.dogbreed.model.Dog;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;

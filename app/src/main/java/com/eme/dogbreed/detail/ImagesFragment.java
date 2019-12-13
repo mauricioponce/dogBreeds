@@ -15,8 +15,6 @@ import com.eme.dogbreed.util.InjectorUtils;
 import com.eme.dogbreed.viewmodel.DogViewModel;
 import com.eme.dogbreed.viewmodel.DogViewModelFactory;
 
-import timber.log.Timber;
-
 public class ImagesFragment extends Fragment {
 
     private DogViewModel viewModel;
@@ -46,7 +44,7 @@ public class ImagesFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentImagesBinding.inflate(inflater, container, false);
 
-        viewModel.getSelected().observe(this, binding::setDogBreed);
+        viewModel.getSelected().observe(getViewLifecycleOwner(), binding::setDogBreed);
 
         setupAdapter();
 

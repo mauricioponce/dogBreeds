@@ -19,8 +19,6 @@ import timber.log.Timber;
 
 public class DogBreedListFragment extends Fragment {
 
-    private DogViewModel viewModel;
-
     private DogListAdapter dogListAdapter;
 
     private FragmentDogBreedListBinding binding;
@@ -29,7 +27,7 @@ public class DogBreedListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = ViewModelProviders.of(getActivity(), new DogViewModelFactory(InjectorUtils.getDogRepository(getContext()))).get(DogViewModel.class);
+        DogViewModel viewModel = ViewModelProviders.of(getActivity(), new DogViewModelFactory(InjectorUtils.getDogRepository(getContext()))).get(DogViewModel.class);
 
         dogListAdapter = new DogListAdapter(viewModel);
 

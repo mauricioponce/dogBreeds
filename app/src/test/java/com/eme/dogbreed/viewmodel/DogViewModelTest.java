@@ -14,8 +14,6 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 public class DogViewModelTest {
 
@@ -24,11 +22,9 @@ public class DogViewModelTest {
 
     private DogViewModel viewModel;
 
-    private IDogRepository fakeRepository;
-
     @Before
     public void setUp() throws Exception {
-        fakeRepository = new FakeRepository();
+        IDogRepository fakeRepository = new FakeRepository();
 
         viewModel = (DogViewModel) new DogViewModelFactory(fakeRepository).create(DogViewModel.class);
     }

@@ -17,8 +17,6 @@ import timber.log.Timber;
  */
 public class DogViewModel extends ViewModel {
 
-    private IDogRepository repository;
-
     private LiveData<List<Dog>> dogos;
 
     private LiveData<List<String>> images;
@@ -26,9 +24,8 @@ public class DogViewModel extends ViewModel {
     private MutableLiveData<Dog> selected = new MutableLiveData<>();
 
     public DogViewModel(IDogRepository repository) {
-        this.repository = repository;
-        this.dogos = Transformations.map(this.repository.getDogs(), input -> input);
-        this.images = Transformations.switchMap(this.selected, this.repository::getImages);
+        this.dogos = Transformations.map(repository.getDogs(), input -> input);
+        this.images = Transformations.switchMap(this.selected, repository::getImages);
     }
 
     public LiveData<List<Dog>> getDogs() {
