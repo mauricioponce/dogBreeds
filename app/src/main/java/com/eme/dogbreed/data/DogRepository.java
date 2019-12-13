@@ -26,7 +26,7 @@ public class DogRepository implements IDogRepository {
 
     private MutableLiveData<List<String>> images = new MutableLiveData<>();
 
-    private DogRepository(IDogRestApi dogRestApi) {
+    DogRepository(IDogRestApi dogRestApi) {
         this.dogRestApi = dogRestApi;
     }
 

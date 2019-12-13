@@ -3,6 +3,7 @@ package com.eme.dogbreed.data;
 import androidx.lifecycle.LiveData;
 
 import com.eme.dogbreed.model.Dog;
+import com.eme.dogbreed.remote.IDogRestApi;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,13 +19,13 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 public class DogRepositoryTest {
 
     IDogRepository repository;
-    FakeRestApi spyService;
+
+    IDogRestApi remoteService;
 
     @Before
     public void setUp() throws Exception {
-        spyService = spy(new FakeRestApi());
-
-        repository = DogRepository.getInstance(spyService);
+        remoteService = spy(new FakeRestApi());
+        repository = new DogRepository(remoteService);
     }
 
     @Test
@@ -35,7 +36,7 @@ public class DogRepositoryTest {
         LiveData<List<Dog>> dogs = repository.getDogs();
 
         // Then
-        verify(spyService, times(1)).getBreedList();
+        verify(remoteService, times(1)).getBreedList();
     }
 
     @Test
@@ -47,7 +48,7 @@ public class DogRepositoryTest {
         LiveData<List<String>> images = repository.getImages(dog);
 
         // Then
-        verify(spyService, times(1)).getBreedImages(anyString());
+        verify(remoteService, times(1)).getBreedImages(anyString());
     }
 
     @Test
@@ -59,6 +60,6 @@ public class DogRepositoryTest {
         repository.getImages(mock);
 
         // Then
-        verify(spyService, times(1)).getBreedImages(anyString(), anyString());
+        verify(remoteService, times(1)).getBreedImages(anyString(), anyString());
     }
 }
