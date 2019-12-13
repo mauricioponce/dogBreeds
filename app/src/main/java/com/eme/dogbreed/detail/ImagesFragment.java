@@ -21,6 +21,8 @@ public class ImagesFragment extends Fragment {
 
     private DogViewModel viewModel;
 
+    private ImageListAdapter imageListAdapter;
+
     private FragmentImagesBinding binding;
 
     @Override
@@ -29,11 +31,13 @@ public class ImagesFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(getActivity(), new DogViewModelFactory(InjectorUtils.getDogRepository(getContext()))).get(DogViewModel.class);
 
+        this.imageListAdapter = new ImageListAdapter();
+
         viewModel.getImages().observe(this, strings -> {
-            Timber.d("strings " + strings.get(0));
+            this.imageListAdapter.submitList(strings);
         });
 
-        viewModel.getSelected().observe(this, binding::setDogBreed);
+
     }
 
     @Nullable
@@ -42,6 +46,14 @@ public class ImagesFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentImagesBinding.inflate(inflater, container, false);
 
+        viewModel.getSelected().observe(this, binding::setDogBreed);
+
+        setupAdapter();
+
         return binding.getRoot();
+    }
+
+    private void setupAdapter() {
+        binding.imagesList.setAdapter(this.imageListAdapter);
     }
 }

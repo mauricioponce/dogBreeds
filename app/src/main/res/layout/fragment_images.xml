@@ -19,7 +19,8 @@
             android:id="@+id/tvDetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
             android:text="@{dogBreed.breedName + ` ` + dogBreed.subBreedName}"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -28,7 +29,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/images_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailTitle"
+            tools:listitem="@layout/list_image_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
