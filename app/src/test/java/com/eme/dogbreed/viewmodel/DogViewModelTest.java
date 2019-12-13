@@ -51,7 +51,7 @@ public class DogViewModelTest {
     }
 
     @Test
-    public void setSelected_happyCase(){
+    public void setSelected_happyCase() {
         // Given
         Dog dog = new Dog("breedName", "subBreedName");
 
@@ -62,7 +62,28 @@ public class DogViewModelTest {
         try {
             TestObserver.test(viewModel.getSelected())
                     .awaitValue()
+                    .assertHasValue()
+                    .assertValue(dog);
+        } catch (InterruptedException iexc) {
+            assertThat(iexc).isNull(); // Forced failure
+        }
+    }
+
+    @Test
+    public void getImages_happyCase() {
+        // Given
+        Dog dog = new Dog("breedName", "subBreedName");
+        viewModel.setSelected(dog);
+
+        // When
+        LiveData<List<String>> images = viewModel.getImages();
+
+        // Then
+        try {
+            TestObserver.test(images)
+                    .awaitValue()
                     .assertHasValue();
+
         } catch (InterruptedException iexc) {
             assertThat(iexc).isNull(); // Forced failure
         }

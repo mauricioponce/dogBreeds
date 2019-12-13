@@ -1,5 +1,6 @@
 package com.eme.dogbreed.viewmodel;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -23,7 +24,7 @@ public class DogViewModel extends ViewModel {
 
     private MutableLiveData<Dog> selected = new MutableLiveData<>();
 
-    public DogViewModel(IDogRepository repository) {
+    public DogViewModel(@NonNull IDogRepository repository) {
         this.dogos = Transformations.map(repository.getDogs(), input -> input);
         this.images = Transformations.switchMap(this.selected, repository::getImages);
     }
@@ -32,12 +33,11 @@ public class DogViewModel extends ViewModel {
         return this.dogos;
     }
 
-    public void setSelected(Dog selected) {
+    public void setSelected(@NonNull Dog selected) {
         this.selected.setValue(selected);
     }
 
     public LiveData<List<String>> getImages() {
-        Timber.d("getImages() called");
         return this.images;
     }
 
