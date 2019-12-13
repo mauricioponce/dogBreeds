@@ -32,11 +32,13 @@ dependencies {
     def nav_version = "2.1.0-rc01"
 
 
-    // Requieres
+    // Requires
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+
 
     // Navigation fragments
     implementation "androidx.navigation:navigation-fragment:$nav_version"

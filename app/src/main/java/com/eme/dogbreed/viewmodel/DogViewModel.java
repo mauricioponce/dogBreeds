@@ -10,6 +10,11 @@ import com.eme.dogbreed.model.Dog;
 
 import java.util.List;
 
+import timber.log.Timber;
+
+/**
+ * Shared view model used in main listing fragment and images fragment
+ */
 public class DogViewModel extends ViewModel {
 
     private IDogRepository repository;
@@ -23,7 +28,7 @@ public class DogViewModel extends ViewModel {
     public DogViewModel(IDogRepository repository) {
         this.repository = repository;
         this.dogos = Transformations.map(this.repository.getDogs(), input -> input);
-        this.images = Transformations.switchMap(selected, dog -> this.repository.getImages(dog));
+        this.images = Transformations.switchMap(this.selected, this.repository::getImages);
     }
 
     public LiveData<List<Dog>> getDogs() {
@@ -35,11 +40,12 @@ public class DogViewModel extends ViewModel {
     }
 
     public LiveData<List<String>> getImages() {
-        return images;
+        Timber.d("getImages() called");
+        return this.images;
     }
 
     // Just for testing
-    public LiveData getSelected() {
-        return selected;
+    public LiveData<Dog> getSelected() {
+        return this.selected;
     }
 }

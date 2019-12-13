@@ -2,12 +2,13 @@ package com.eme.dogbreed.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.eme.dogbreed.data.IDogRepository;
 
 import org.jetbrains.annotations.NotNull;
 
-public class DogViewModelFactory {
+public class DogViewModelFactory extends ViewModelProvider.NewInstanceFactory{
 
     private final IDogRepository repository;
 

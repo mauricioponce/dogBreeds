@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/dogBreedListFragment"
         android:name="com.eme.dogbreed.listing.DogBreedListFragment"
-        android:label="DogBreedListFragment" />
+        android:label="DogBreedListFragment" >
+        <action
+            android:id="@+id/action_dogBreedListFragment_to_imagesFragment"
+            app:destination="@id/imagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imagesFragment"
+        android:name="com.eme.dogbreed.detail.ImagesFragment"
+        android:label="ImagesFragment" />
 </navigation>

@@ -5,10 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.eme.dogbreed.R;
 import com.eme.dogbreed.databinding.ListItemBinding;
 import com.eme.dogbreed.model.Dog;
 import com.eme.dogbreed.viewmodel.DogViewModel;
@@ -40,7 +42,10 @@ public class DogListAdapter extends ListAdapter<Dog, DogListAdapter.ViewHolder> 
     private View.OnClickListener createOnClickListener(Dog dog) {
         return (view) -> {
             Timber.d("createOnClickListener() called with: dog = [" + dog + "]");
+
             viewModel.setSelected(dog);
+
+            Navigation.findNavController(view).navigate(R.id.action_dogBreedListFragment_to_imagesFragment);
         };
     }
 

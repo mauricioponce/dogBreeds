@@ -44,8 +44,6 @@ public class DogRepository implements IDogRepository {
         dogRestApi.getBreedList().enqueue(new Callback<ResponseWrapper>() {
             @Override
             public void onResponse(@NonNull Call<ResponseWrapper> call, @NonNull Response<ResponseWrapper> response) {
-                Timber.d("onResponse() called with: response = [" + response + "]");
-
                 if (response.isSuccessful()) {
                     List<Dog> dogList = Transformer.transformFromResponse(response.body().getMessage());
 
@@ -62,8 +60,6 @@ public class DogRepository implements IDogRepository {
     }
 
     public LiveData<List<String>> getImages(Dog dog) {
-        Timber.d("getImages() called with: dog = [" + dog + "]");
-
         Callback<ResponseWrapper.ResponseWrapperList> callback = new Callback<ResponseWrapper.ResponseWrapperList>() {
             @Override
             public void onResponse(Call<ResponseWrapper.ResponseWrapperList> call, Response<ResponseWrapper.ResponseWrapperList> response) {
